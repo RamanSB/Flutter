@@ -8,6 +8,7 @@ class ProductControl extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    print('[ProductControl StatelessWidget] build');
     return RaisedButton(
       color: Theme.of(context).primaryColor,
       onPressed: () {

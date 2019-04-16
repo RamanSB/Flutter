@@ -12,7 +12,7 @@ class ProductManager extends StatefulWidget {
 
   @override
   State createState() {
-    print('[ProductManager Widget] CreateState');
+    print('[ProductManager StatefulWidget] CreateState');
     return new _ProductManagerState();
   }
 }
@@ -23,7 +23,7 @@ class _ProductManagerState extends State<ProductManager> {
   @override
   void initState() {
     print('[ProductManagerState Widget] InitState');
-    _products.add(widget.startingProduct);
+    //_products.add(widget.startingProduct);
     super.initState();
   }
 
@@ -33,7 +33,7 @@ class _ProductManagerState extends State<ProductManager> {
     return Column(
       children: <Widget>[
         Container(margin: EdgeInsets.all(10.0), child: ProductControl(_addProduct)),
-        Expanded(child: Products(_products))
+        Flexible(child: Products(_products, deleteProduct: _deleteProduct))
       ],
     );
   }
@@ -48,6 +48,11 @@ class _ProductManagerState extends State<ProductManager> {
     setState(() {
       _products.add(product);
     });
+  }
 
+  void _deleteProduct(int index){
+    setState((){
+      _products.removeAt(index);
+    });
   }
 }
