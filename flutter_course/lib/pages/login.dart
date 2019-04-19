@@ -11,11 +11,7 @@ class LoginPage extends StatelessWidget {
             child: new RaisedButton(
                 child: new Text('LOGIN'),
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context) {
-                        return ProductsPage();
-                      }
-                  ));
+                  Navigator.pushReplacementNamed(context, '/' );
                 }
             )
         )

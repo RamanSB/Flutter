@@ -9,8 +9,9 @@ import 'pages/product.dart';
 class Products extends StatelessWidget {
   final List<Map<String, String>> products;
   Function deleteProduct;
+  Function addProduct;
 
-  Products(this.products, {this.deleteProduct}) {
+  Products(this.products, this.addProduct, {this.deleteProduct}) {
     //wrapping constructor param in [] ensures arg is optional.
     print('[Products Widget] Constructor');
   } //Syntactic sugar, initializes products
@@ -37,13 +38,8 @@ class Products extends StatelessWidget {
             children: <Widget>[
               new FlatButton(
                   child: Text("Details"),
-                  onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute<bool>(
-                            builder: (BuildContext context) => ProductPage(
-                                products[index]['title'],
-                                products[index]['imageUrl'])),
-                      ).then((bool value) {
+                  onPressed: () => Navigator.pushNamed<bool>(context, '/product/' + index.toString())
+                      .then((bool value) {
                         if(value){
                           deleteProduct(index);
                         }
