@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
   State createState() {
     return new _MyAppState();
   }
+
 }
 
 class _MyAppState extends State<MyApp> {
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
       _products.removeAt(index);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,7 +48,7 @@ class _MyAppState extends State<MyApp> {
           '/admin': (BuildContext context) {
             return new ProductsAdminPage();
           },
-          '/': (BuildContext context) => ProductsPage(_products, _addProduct, _deleteProduct)
+          '/': (BuildContext context) => ProductsPage(_products, _addProduct, _deleteProduct) // '/' is preserved for home.
         },
         onGenerateRoute: (RouteSettings settings) {
           final List<String> pathElements = settings.name.split('/');
@@ -60,6 +62,16 @@ class _MyAppState extends State<MyApp> {
                     _products[index]['title'], _products[index]['imageUrl']));
           }
           return null;
-        }); //Core root widget - top level widget
+        },
+        onUnknownRoute: (RouteSettings settings) {
+          return MaterialPageRoute(
+            builder: (BuildContext context) {
+              return ProductsPage(_products, _addProduct, _deleteProduct);
+            }
+          );
+        }
+    ); //Core root widget - top level widget
+
   }
+
 }
