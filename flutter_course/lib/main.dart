@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_course/pages/login.dart';
+import 'package:flutter_course/pages/auth.dart';
 import 'package:flutter_course/pages/product_create_page.dart';
 import 'package:flutter_course/pages/products_admin.dart';
 import 'pages/products.dart';
@@ -21,16 +21,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  List<Map<String, String>> _products = [];
+  List<Map<String, dynamic>> _products = [];
 
-  void _addProduct(Map<String, String> product){
+  void _addProduct(Map<String, dynamic> product) {
     setState(() {
       _products.add(product);
     });
   }
 
-  void _deleteProduct(int index){
-    setState((){
+  void _deleteProduct(int index) {
+    setState(() {
       _products.removeAt(index);
     });
   }
@@ -38,17 +38,17 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        //  home: ProductsAdminPage(),
+      //  home: ProductsAdminPage(),
         theme: ThemeData(
           primarySwatch: Colors.deepOrange,
           accentColor: Colors.deepPurple,
           brightness: Brightness.light,
         ),
         routes: {
-          '/admin': (BuildContext context) {
-            return new ProductsAdminPage();
-          },
-          '/': (BuildContext context) => ProductsPage(_products, _addProduct, _deleteProduct) // '/' is preserved for home.
+          '/admin': (BuildContext context) =>
+              ProductsAdminPage(_addProduct, _deleteProduct),
+          '/': (BuildContext context) => AuthPage(), // '/' is preserved for home.
+          '/products': (BuildContext context) => ProductsPage(_products)
         },
         onGenerateRoute: (RouteSettings settings) {
           final List<String> pathElements = settings.name.split('/');
@@ -58,16 +58,17 @@ class _MyAppState extends State<MyApp> {
           if (pathElements[1] == "product") {
             final int index = int.parse(pathElements[2]);
             return MaterialPageRoute<bool>(
-                builder: (BuildContext context) => ProductPage(
-                    _products[index]['title'], _products[index]['imageUrl']));
+                builder: (BuildContext context) =>
+                    ProductPage(
+                        _products[index]['title'], _products[index]['image']));
           }
           return null;
         },
         onUnknownRoute: (RouteSettings settings) {
           return MaterialPageRoute(
-            builder: (BuildContext context) {
-              return ProductsPage(_products, _addProduct, _deleteProduct);
-            }
+              builder: (BuildContext context) {
+                return ProductsPage(_products);
+              }
           );
         }
     ); //Core root widget - top level widget

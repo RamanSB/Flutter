@@ -4,6 +4,13 @@ import './product_list_page.dart';
 import './product_create_page.dart';
 
 class ProductsAdminPage extends StatelessWidget {
+  Function _addProduct;
+  Function _deleteProduct;
+
+  /*using this.(instance_var) for constructor paramis syntactic sugar to initi-
+   alize the variables*/
+
+  ProductsAdminPage(this._addProduct, this._deleteProduct);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,7 @@ class ProductsAdminPage extends StatelessWidget {
               ListTile(
                   title: Text("Products"),
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, '/');
+                    Navigator.pushReplacementNamed(context, '/products');
                   })
             ])),
             appBar: AppBar(
@@ -42,9 +49,10 @@ class ProductsAdminPage extends StatelessWidget {
               ]),
             ),
             body: new TabBarView(
-              children: <Widget>[ProductCreatePage(), ProductListPage()],
+              children: <Widget>[
+                ProductCreatePage(_addProduct, _deleteProduct),
+                ProductListPage()
+              ],
             )));
-
   }
-
 }

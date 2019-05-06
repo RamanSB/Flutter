@@ -7,11 +7,9 @@ import 'pages/product.dart';
  */
 
 class Products extends StatelessWidget {
-  final List<Map<String, String>> products;
-  Function deleteProduct;
-  Function addProduct;
+  final List<Map<String, dynamic>> products;
 
-  Products(this.products, this.addProduct, {this.deleteProduct}) {
+  Products(this.products) {
     //wrapping constructor param in [] ensures arg is optional.
     print('[Products Widget] Constructor');
   } //Syntactic sugar, initializes products
@@ -31,7 +29,7 @@ class Products extends StatelessWidget {
     return Card(
       child: Column(
         children: <Widget>[
-          Image.asset(products[index]['imageUrl']),
+          Image.asset(products[index]['image']),
           Text(products[index]['title']),
           ButtonBar(
             alignment: MainAxisAlignment.center,
@@ -39,11 +37,7 @@ class Products extends StatelessWidget {
               new FlatButton(
                   child: Text("Details"),
                   onPressed: () => Navigator.pushNamed<bool>(context, '/product/' + index.toString())
-                      .then((bool value) {
-                        if(value){
-                          deleteProduct(index);
-                        }
-                  }))
+              )
             ],
           )
         ],
