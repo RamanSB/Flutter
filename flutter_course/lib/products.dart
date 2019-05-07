@@ -16,7 +16,8 @@ class Products extends StatelessWidget {
 
   Widget _buildProductList() {
     print('[Products] _buildProductList');
-    Widget productCard = Center(child: new Text("No products found, please add some."));
+    Widget productCard =
+        Center(child: new Text("No products found, please add some."));
     if (products.length > 0) {
       productCard = ListView.builder(
           itemBuilder: _itemBuilder, itemCount: products.length);
@@ -30,14 +31,35 @@ class Products extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Image.asset(products[index]['image']),
-          Text(products[index]['title']),
+          Container(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(
+                      products[index]['title'],
+                      style: TextStyle(
+                          fontSize: 26.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Oswald'),
+                    ),
+                    Container(
+                        padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: Theme.of(context).accentColor),
+                        child: Text(
+                            '\$${products[index]['price'].toString()}',
+                            style: TextStyle(color: Colors.white))
+                    )
+                  ])),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               new FlatButton(
                   child: Text("Details"),
-                  onPressed: () => Navigator.pushNamed<bool>(context, '/product/' + index.toString())
-              )
+                  onPressed: () => Navigator.pushNamed<bool>(
+                      context, '/product/' + index.toString()))
             ],
           )
         ],
