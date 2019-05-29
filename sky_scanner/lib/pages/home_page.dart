@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: _buildBottomNavigationBar());
+
   }
 
   Widget _buildBottomNavigationBar() {
