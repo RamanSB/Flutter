@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_course/pages/auth.dart';
-import 'package:flutter_course/pages/product_create_page.dart';
-import 'package:flutter_course/pages/products_admin.dart';
-import 'pages/products.dart';
-import 'pages/product.dart';
+// import 'package:flutter/rendering.dart';
 
-//This main method, will start the app - Renders the UI (Widget Tree).
-void main() => runApp(MyApp());
-/*Can only have one statement in body when using fat Arrow notation
-=> hence only one ; appears, marks one statement. */
+import './pages/auth.dart';
+import './pages/products_admin.dart';
+import './pages/products.dart';
+import './pages/product.dart';
+
+void main() {
+  // debugPaintSizeEnabled = true;
+  // debugPaintBaselinesEnabled = true;
+  // debugPaintPointersEnabled = true;
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
 
   @override
-  State createState() {
-    return new _MyAppState();
+  State<StatefulWidget> createState() {
+    return _MyAppState();
   }
-
 }
 
 class _MyAppState extends State<MyApp> {
-
   List<Map<String, dynamic>> _products = [];
 
   void _addProduct(Map<String, dynamic> product) {
     setState(() {
       _products.add(product);
     });
+    print(_products);
   }
 
   void _deleteProduct(int index) {
@@ -38,41 +40,39 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //  home: ProductsAdminPage(),
-        theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
-          accentColor: Colors.deepPurple,
+      // debugShowMaterialGrid: true,
+      theme: ThemeData(
           brightness: Brightness.light,
-        ),
-        routes: {
-          '/admin': (BuildContext context) =>
-              ProductsAdminPage(_addProduct, _deleteProduct),
-          '/': (BuildContext context) => AuthPage(), // '/' is preserved for home.
-          '/products': (BuildContext context) => ProductsPage(_products)
-        },
-        onGenerateRoute: (RouteSettings settings) {
-          final List<String> pathElements = settings.name.split('/');
-          if (pathElements[0] != '') {
-            return null;
-          }
-          if (pathElements[1] == "product") {
-            final int index = int.parse(pathElements[2]);
-            return MaterialPageRoute<bool>(
-                builder: (BuildContext context) =>
-                    ProductPage(
-                        _products[index]['title'], _products[index]['image']));
-          }
+          primarySwatch: Colors.deepOrange,
+          accentColor: Colors.deepPurple),
+      // home: AuthPage(),
+      routes: {
+        '/': (BuildContext context) => AuthPage(),
+        '/products': (BuildContext context) => ProductsPage(_products),
+        '/admin': (BuildContext context) =>
+            ProductsAdminPage(_addProduct, _deleteProduct),
+      },
+      onGenerateRoute: (RouteSettings settings) {
+        final List<String> pathElements = settings.name.split('/');
+        if (pathElements[0] != '') {
           return null;
-        },
-        onUnknownRoute: (RouteSettings settings) {
-          return MaterialPageRoute(
-              builder: (BuildContext context) {
-                return ProductsPage(_products);
-              }
+        }
+        if (pathElements[1] == 'product') {
+          final int index = int.parse(pathElements[2]);
+          return MaterialPageRoute<bool>(
+            builder: (BuildContext context) => ProductPage(
+                _products[index]['title'],
+                _products[index]['image'],
+                _products[index]['price'],
+                _products[index]['description']),
           );
         }
-    ); //Core root widget - top level widget
-
+        return null;
+      },
+      onUnknownRoute: (RouteSettings settings) {
+        return MaterialPageRoute(
+            builder: (BuildContext context) => ProductsPage(_products));
+      },
+    );
   }
-
 }
