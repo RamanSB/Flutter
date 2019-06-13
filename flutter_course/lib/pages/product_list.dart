@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../models/product.dart';
 import './product_edit.dart';
 
 class ProductListPage extends StatelessWidget {
-  List<Map<String, dynamic>> products;
+  List<Product> products;
   final Function updateProduct;
   final Function deleteProduct;
 
@@ -35,7 +36,7 @@ class ProductListPage extends StatelessWidget {
                 deleteProduct(index);
               }
             },
-            key: Key(products[index]['title']),
+            key: Key(products[index].title),
             background: Container(
                 decoration: BoxDecoration(
                     gradient: new LinearGradient(
@@ -45,10 +46,10 @@ class ProductListPage extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 8.0),
                 child: ListTile(
                   leading: CircleAvatar(
-                      backgroundImage: AssetImage(products[index]['image'])),
-                  title: Text(products[index]['title'],
+                      backgroundImage: AssetImage(products[index].image)),
+                  title: Text(products[index].title,
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text("\$${products[index]['price'].toString()}"),
+                  subtitle: Text("\$${products[index].price.toString()}"),
                   trailing: _buildEditProductButton(context, index),
                 ),
               ),
