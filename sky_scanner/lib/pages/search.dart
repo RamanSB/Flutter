@@ -29,25 +29,9 @@ class SearchPage extends StatelessWidget {
         delegate: SliverChildListDelegate([
           _buildIconButtonRow(context),
           _buildBeInspiredTextWidget(),
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 18.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _buildInspirationCard(
-                        context,
-                        "Need help deciding where to go?",
-                        "Find great destinations",
-                        Icons.language,
-                        () {}),
-                    _buildInspirationCard(
-                        context,
-                        "Already know where you're going?",
-                        "Find best dates",
-                        Icons.date_range,
-                            () {}),
-                  ])),
-
+          _buildInspirationItemWidget(context),
+          _buildNextTripWidget(),
+          _buildSavedFlightWidget(context),
         ]),
       ),
     ]);
@@ -157,8 +141,11 @@ class SearchPage extends StatelessWidget {
                           children: <Widget>[
                             SizedBox(height: 16.0),
                             Text(subtleText),
-                            Text(mainText, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,
-                            fontSize: 14.0)),
+                            Text(mainText,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontSize: 14.0)),
                             SizedBox(height: 16.0),
                           ])),
                   SizedBox(width: 24.0),
@@ -167,5 +154,156 @@ class SearchPage extends StatelessWidget {
                     size: 12,
                   ),
                 ])));
+  }
+
+  Widget _buildInspirationItemWidget(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 18.0),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _buildInspirationCard(context, "Need help deciding where to go?",
+                  "Find great destinations", Icons.language, () {}),
+              _buildInspirationCard(context, "Already know where you're going?",
+                  "Find best dates", Icons.date_range, () {}),
+            ]));
+  }
+
+  Widget _buildNextTripWidget() {
+    return Container(
+        margin: EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
+        child: Column(children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text("Plan Your Next Trip",
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold)),
+              InkWell(
+                child: Text("Explore All",
+                    style: TextStyle(
+                        color: Colors.lightBlueAccent, fontSize: 15.0)),
+                onTap: () {},
+              ),
+            ],
+          ),
+          Container(
+              height: 200.0,
+              margin: EdgeInsets.symmetric(vertical: 18.0),
+              child:
+                  ListView(scrollDirection: Axis.horizontal, children: <Widget>[
+                InkWell(
+                  child: Container(
+                      width: 140.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/next_trip_1.jpg'),
+                            colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.8),
+                                BlendMode.dstATop),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                              margin: EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 12.0),
+                              child: Text("Next weekend",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold)))
+                        ],
+                      )),
+                  onTap: () {},
+                ),
+                SizedBox(width: 16.0),
+                InkWell(
+                  child: Container(
+                    width: 140.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/next_trip_2.jpg'),
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                SizedBox(width: 16.0),
+                InkWell(
+                  child: Container(
+                    width: 140.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/next_trip_3.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                SizedBox(width: 16.0),
+                InkWell(
+                  child: Container(
+                    width: 140.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/next_trip_4.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                SizedBox(width: 16.0),
+                InkWell(
+                  child: Container(
+                    width: 140.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/next_trip_5.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                SizedBox(width: 16.0),
+                InkWell(
+                  child: Container(
+                    width: 140.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/next_trip_6.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  onTap: () {},
+                )
+              ]))
+        ]));
+  }
+
+  Widget _buildSavedFlightWidget(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        child: Column(children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+            Text("Saved flights",
+                style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.normal))
+          ]),
+          Container(
+              margin: EdgeInsets.fromLTRB(0, 36.0, 0, 24.0),
+              child: Column(children: <Widget>[
+                Image.asset('assets/saved_flights_icon.jpg', width: 120.0, height: 120.0,)
+              ])),
+          Text("See a flight you fancy? Star it to save for later")
+        ]));
   }
 }
