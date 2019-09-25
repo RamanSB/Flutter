@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sky_scanner/pages/trips.dart';
 import 'search.dart';
+import 'explore.dart';
+import 'trips.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,8 +16,8 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     Center(child: SearchPage()),
-    Center(child: Text("Explore", style: TextStyle(fontSize: 28.0),)),
-    Center(child: Text("Trips", style: TextStyle(fontSize: 28.0),)),
+    Center(child: ExplorePage()/*Text("Explore", style: TextStyle(fontSize: 28.0),)*/),
+    Center(child: TripPage()/*Text("Trips", style: TextStyle(fontSize: 28.0),)*/),
     Center(child: Text("Profile", style: TextStyle(fontSize: 28.0),)),
   ];
 
@@ -23,7 +26,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: _buildBottomNavigationBar());
-
   }
 
   Widget _buildBottomNavigationBar() {

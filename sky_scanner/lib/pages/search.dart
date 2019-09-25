@@ -32,6 +32,8 @@ class SearchPage extends StatelessWidget {
           _buildInspirationItemWidget(context),
           _buildNextTripWidget(),
           _buildSavedFlightWidget(context),
+          _buildRecentSearchAndPriceAlertsTextWidget(),
+          _buildRecentSearchAndPriceAlertsWidget(context)
         ]),
       ),
     ]);
@@ -300,10 +302,46 @@ class SearchPage extends StatelessWidget {
           ]),
           Container(
               margin: EdgeInsets.fromLTRB(0, 36.0, 0, 24.0),
+              //  decoration: BoxDecoration(color: Colors.blue, ),
               child: Column(children: <Widget>[
-                Image.asset('assets/saved_flights_icon.jpg', width: 120.0, height: 120.0,)
+                Image.asset('assets/saved_flights_icon.jpg',
+                    width: 120.0,
+                    height: 120.0,
+                    filterQuality: FilterQuality.high,
+                    colorBlendMode: BlendMode.luminosity, //Can ColorBlend be used to make the image background transparent?
+                      color: Color.fromARGB(0, 3, 2, 250))
               ])),
           Text("See a flight you fancy? Star it to save for later")
         ]));
+  }
+
+  /*ToDo:  Refactor _buildRecentSearchAndPriceAlertsTextWidget & _buildBeInspiredTextWidget
+     in to one method.
+
+   */
+  Widget _buildRecentSearchAndPriceAlertsTextWidget() {
+    return Container(
+        padding: EdgeInsets.only(left: 24.0, top: 32.0),
+        height: 60.0,
+        child: Text("Recent searches and Price Alerts",
+            style: TextStyle(
+                fontStyle: FontStyle.normal,
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold)));
+  }
+
+  //ToDo: Replace below PlaceHolder with ListTiles...
+  Widget _buildRecentSearchAndPriceAlertsWidget(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.fromLTRB(24.0, 24.0, 10.0, 0.0),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+      Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[Text("Place Holder 1")]),
+      Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[Text("Place Holder 2")])
+    ]));
   }
 }
