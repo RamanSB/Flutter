@@ -19,25 +19,84 @@ class _ExplorePageState extends State<ExplorePage> {
   List allResults = new List();
   List filteredResults = new List();
 
-  List<ExploreListItem> _recommendedDestinations = new List();
-
+  List<ExploreListItem> _recommendedDestinationList = new List();
+  List<ExploreListItem> _perfectTripList = new List();
+  List<ExploreListItem> _beInspiredList = new List();
+  List<ExploreListItem> _weekendBreakList = new List();
+  List<ExploreListItem> _bestDealsList = new List();
 
   @override
   void initState() {
     print("Inside initialize state - initState()");
-    initRecommendedDestinations();
+    initRecommendedDestinationList();
+    initPerfectTripList();
+    initBeInspiredList();
+    initWeekendBreakList();
+    initBestDealsList();
   }
 
-  void initRecommendedDestinations() {
-    _recommendedDestinations.add(new ExploreListItem(
+  void initRecommendedDestinationList() {
+    _recommendedDestinationList.add(new ExploreListItem(
         imgAssetResource: "", imgText: "Popular destinations"));
-    _recommendedDestinations.add(
+    _recommendedDestinationList.add(
         new ExploreListItem(imgAssetResource: "", imgText: "Quick Getaways"));
-    _recommendedDestinations
+    _recommendedDestinationList
         .add(new ExploreListItem(imgAssetResource: "", imgText: "yyy"));
-    _recommendedDestinations
+    _recommendedDestinationList
         .add(new ExploreListItem(imgAssetResource: "", imgText: "aaa"));
-    _recommendedDestinations
+    _recommendedDestinationList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "zzz"));
+  }
+
+  void initPerfectTripList() {
+    _perfectTripList.add(new ExploreListItem(
+        imgAssetResource: "", imgText: "Popular destinations"));
+    _perfectTripList.add(
+        new ExploreListItem(imgAssetResource: "", imgText: "Quick Getaways"));
+    _perfectTripList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "yyy"));
+    _perfectTripList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "aaa"));
+    _perfectTripList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "zzz"));
+  }
+
+  void initBeInspiredList() {
+    _beInspiredList.add(new ExploreListItem(
+        imgAssetResource: "", imgText: "Popular destinations"));
+    _beInspiredList.add(
+        new ExploreListItem(imgAssetResource: "", imgText: "Quick Getaways"));
+    _beInspiredList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "yyy"));
+    _beInspiredList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "aaa"));
+    _beInspiredList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "zzz"));
+  }
+
+  void initWeekendBreakList() {
+    _weekendBreakList.add(new ExploreListItem(
+        imgAssetResource: "", imgText: "Popular destinations"));
+    _weekendBreakList.add(
+        new ExploreListItem(imgAssetResource: "", imgText: "Quick Getaways"));
+    _weekendBreakList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "yyy"));
+    _weekendBreakList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "aaa"));
+    _weekendBreakList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "zzz"));
+  }
+
+  void initBestDealsList() {
+    _bestDealsList.add(new ExploreListItem(
+        imgAssetResource: "", imgText: "Popular destinations"));
+    _bestDealsList.add(
+        new ExploreListItem(imgAssetResource: "", imgText: "Quick Getaways"));
+    _bestDealsList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "yyy"));
+    _bestDealsList
+        .add(new ExploreListItem(imgAssetResource: "", imgText: "aaa"));
+    _bestDealsList
         .add(new ExploreListItem(imgAssetResource: "", imgText: "zzz"));
   }
 
@@ -57,8 +116,13 @@ class _ExplorePageState extends State<ExplorePage> {
           delegate: SliverChildListDelegate(<Widget>[
         _buildSearchBarWidget(context),
         _buildExploreImageWidget(context),
-        _buildRecommendedDestinationWidget(context),
-            //Repeat the above 5 more times - Weekend breaks, Be Inspired, Best Deals by Month, Recently viewed
+        _buildExploreList(
+            context, "Recommended Destinations", _recommendedDestinationList),
+        _buildExploreList(context, "Your Perfect Trip", _perfectTripList),
+        _buildExploreList(context, "Be Inspired", _beInspiredList),
+        _buildExploreList(context, "Weekend breaks", _weekendBreakList),
+        _buildExploreList(context, "Best Deals by Month", _bestDealsList),
+        //Repeat the above 5 more times - Weekend breaks, Be Inspired, Best Deals by Month, Recently viewed
       ])),
     ]);
   }
@@ -125,9 +189,10 @@ class _ExplorePageState extends State<ExplorePage> {
             ]));
   }
 
-  _buildRecommendedDestinationWidget(BuildContext context) {
+  _buildExploreList(
+      BuildContext context, String exploreSubtitle, List<dynamic> exploreList) {
     return Container(
-        height: 300.0,
+        height: 230,
         padding:
             EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
         child: Column(
@@ -136,7 +201,7 @@ class _ExplorePageState extends State<ExplorePage> {
               Row(
                 children: <Widget>[
                   Text(
-                    "Recommended Destinations",
+                    "$exploreSubtitle",
                     style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -148,9 +213,8 @@ class _ExplorePageState extends State<ExplorePage> {
               Expanded(
                   child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int i) =>
-                    _recommendedDestinations[i],
-                itemCount: _recommendedDestinations.length,
+                itemBuilder: (BuildContext context, int i) => exploreList[i],
+                itemCount: exploreList.length,
               ))
             ]));
   }
@@ -174,9 +238,8 @@ class ExploreListItem extends StatelessWidget {
             height: 120.0,
           ),
           SizedBox(height: 12.0),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-                Flexible(child: Text(imgText.toString(), style: TextStyle())),
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+            Flexible(child: Text(imgText.toString(), style: TextStyle())),
           ])
         ]));
   }

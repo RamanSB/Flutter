@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../tab_pages/past_trips.dart';
+import '../tab_pages/upcoming_trips.dart';
 
 class TripPage extends StatefulWidget {
   const TripPage();
@@ -30,28 +32,36 @@ class _TripPageState extends State<TripPage> {
         ]),
         DefaultTabController(
           length: 2,
-          child: Container(
-            child: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(left: 16.0, top: 24.0),
-                  child: Row(children: <Widget>[
-                    TabBar(
-                      tabs: <Widget>[
-                        Tab(text: "Upcoming".toUpperCase()),
-                        Tab(text: "Past".toUpperCase())
-                      ],
-                      isScrollable: true,
-                      indicatorColor: Colors.deepPurple,
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Color.fromRGBO(78, 78, 81, 30),
-                    )
-                  ])),
-              TabBarView(children: <Widget>[
-                //UpcomingTripsPage(),
-                //PastTripsPage()
-              ],)
-            ]),
-          ),
+          child: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+            Padding(
+                padding: EdgeInsets.only(left: 16.0, top: 24.0),
+                child: Row(children: <Widget>[
+                  TabBar(
+                    tabs: <Widget>[
+                      Tab(text: "Upcoming".toUpperCase()),
+                      Tab(text: "Past".toUpperCase())
+                    ],
+                    isScrollable: true,
+                    indicatorColor: Colors.deepPurple,
+                    labelColor: Colors.black,
+                    unselectedLabelColor: Color.fromRGBO(78, 78, 81, 30),
+                  )
+                ])),
+//            TabBarView(
+//              children: <Widget>[
+//                Container(
+//                    color: Colors.pink,
+//                    child: Image.asset('assets/saved_flights_icon.jpg',
+//                        width: 200.0, height: 200.0)),
+//                Container(
+//                    color: Colors.greenAccent,
+//                    child: Image.asset('assets/saved_flights_icon.jpg',
+//                        width: 200.0, height: 200.0)),
+////                UpcomingTripsTabPage(),
+////                PastTripsTabPage()
+//              ],
+//            )
+          ]),
         )
       ],
     );

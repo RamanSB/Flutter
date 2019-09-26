@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sky_scanner/pages/profile.dart';
 import 'package:sky_scanner/pages/trips.dart';
 import 'search.dart';
 import 'explore.dart';
@@ -14,11 +15,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     Center(child: SearchPage()),
     Center(child: ExplorePage()/*Text("Explore", style: TextStyle(fontSize: 28.0),)*/),
     Center(child: TripPage()/*Text("Trips", style: TextStyle(fontSize: 28.0),)*/),
-    Center(child: Text("Profile", style: TextStyle(fontSize: 28.0),)),
+    Center(child: ProfilePage()/*Text("Profile", style: TextStyle(fontSize: 28.0),)*/),
   ];
 
   @override
