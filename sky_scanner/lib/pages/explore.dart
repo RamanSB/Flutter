@@ -104,13 +104,20 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget build(BuildContext context) {
     return CustomScrollView(slivers: <Widget>[
       SliverAppBar(
-        expandedHeight: 44.0,
-        floating: true,
+        expandedHeight: 84.0,
         pinned: true,
         backgroundColor: Colors.white,
-        title: Text("Explore",
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textScaleFactor: 1.5),
+        flexibleSpace: FlexibleSpaceBar(
+          title: Text(
+            "Explore",
+            style: TextStyle(
+              color: Colors.orangeAccent,
+              fontWeight: FontWeight.bold,
+           //   fontFamily:
+            ),
+          ),
+          titlePadding: EdgeInsets.only(left: 24.0, bottom: 16.0),
+        ),
       ),
       SliverList(
           delegate: SliverChildListDelegate(<Widget>[
